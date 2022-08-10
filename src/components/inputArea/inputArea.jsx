@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }  from "react";
 import styles from "./inputArea.module.css"
 
 const InputArea = () => {
@@ -7,18 +7,18 @@ const InputArea = () => {
   // let text = newDealElement.current.value;
   let dealsArray = []
 
-  function addDeal() {
-    dealsArray.push("сделать...")
-    console.log(dealsArray)
-  }
+ 
+    const [count, setCount] = useState(0)
+  
   return (
-    <div className={styles.inputArea}>
+    <form className={styles.inputArea}>
       <h3>Введите следующее запланированное действие:</h3>
       <textarea placeholder="Введите следующее дело..." ref={newDealElement}></textarea>
-      <button onClick={addDeal}>Добавить дело!</button>
+      <button onClick={() => setCount(count + 1)}>Добавить дело!</button>
       <button>Вычеркнуть последнее дело!</button>
-      <p>${dealsArray}</p>
-    </div>
+      <p>You clicked {count} times</p>
+      <p>{dealsArray}</p>
+    </form>
   );
 }
 
