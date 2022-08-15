@@ -3,20 +3,37 @@ import styles from "./inputArea.module.css"
 
 const InputArea = () => {
 
-  let newDealElement = React.createRef();
-  // let text = newDealElement.current.value;
+
   let dealsArray = []
 
  
-    const [count, setCount] = useState(0)
+   
+    const [myVariable, setMyVariable] = useState([]);
+
+   function heandleChange(event) {
+      console.log(event.target.value)
+      setMyVariable(myVariable => {return [...myVariable, ...event.target.value]})
+      
+      // console.log(myVariable)
+    }
+
+    function handleSubmit(e){
+      e.preventDefault();
+      myVariable.join('')
+      dealsArray.push(myVariable)
+      console.log(`итог - ${dealsArray}`)
+    }
+  
+ 
+   
   
   return (
-    <form className={styles.inputArea}>
+    <form onSubmit={handleSubmit} className={styles.inputArea}>
       <h3>Введите следующее запланированное действие:</h3>
-      <textarea placeholder="Введите следующее дело..." ref={newDealElement}></textarea>
-      <button onClick={() => setCount(count + 1)}>Добавить дело!</button>
+      <textarea placeholder="Введите следующее дело..." onChange={heandleChange}></textarea>
+      <button onClick={heandleChange}>Добавить дело!</button>
       <button>Вычеркнуть последнее дело!</button>
-      <p>You clicked {count} times</p>
+      <p>You clicked times</p>
       <p>{dealsArray}</p>
     </form>
   );
