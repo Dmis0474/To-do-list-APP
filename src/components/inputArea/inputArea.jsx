@@ -8,7 +8,7 @@ const InputArea = () => {
  
   const handleChange = (e) => {
     setTask(e.target.value);
-    console.log(task);
+    // console.log(task);
   }
 
 
@@ -17,25 +17,37 @@ const InputArea = () => {
     e.preventDefault();
     const taskObj = {id: generatedId, text: task, done: false} 
     setTasks([...tasks, taskObj])
-    console.log(tasks);
+    e.target.value = '';
+    // console.log(tasks);
   }
 
   function handleDelete(e) {
-    console.log(e.target.parentNode.getAttribute('id'))
+    // console.log(e.target.parentNode.getAttribute('id'))
     setTasks(tasks.filter((task) => task.id !== e.target.parentNode.getAttribute('id')))
+  }
+
+
+  function taskDone(e) { 
+      e.target.parentNode.style.textDecorationLine = 'line-through';
   }
 
 
 
  let taskList = tasks.map((task, index) => {
-    return <li id={task.id} key={task.id}>{task.text}<button form={task.id} onClick={handleDelete}>Удалить</button></li>
+    return (<li id={task.id} key={task.id}>
+      {task.text}
+      <button onClick={handleDelete}>Удалить</button>
+      <button onClick={taskDone}>Задача выполнена!</button>
+      </li>)
   })
 
   return (
-    <form onSubmit={handleSubmit} className={styles.inputArea}>
+    <form onSubmit={handleSubmit} onKeyDown={(event) => {
+      if(event.key === 'Enter') {handleSubmit(event)}
+    }} className={styles.inputArea}>
       <h3>Введите следующее запланированное действие:</h3>
       <textarea name="task" placeholder="Введите следующее дело..." onChange={handleChange}></textarea>
-      <button onSubmit={handleSubmit}>Добавить дело!</button>
+      <button>Добавить дело!</button>
       <ul>
         Дела:
         {taskList}
