@@ -16,9 +16,14 @@ const InputArea = () => {
     const generatedId = Math.random().toString(16).slice(2)
     e.preventDefault();
     const taskObj = {id: generatedId, text: task, done: false} 
+    if (e.type === 'click') {
     setTasks([...tasks, taskObj])
     setTask('');
-    // console.log(tasks);
+    }
+    if (e.key === 'Enter') {
+      setTasks([...tasks, taskObj])
+      setTask('');
+    } 
   }
 
   function handleDelete(e) {
@@ -31,9 +36,7 @@ const InputArea = () => {
       e.target.parentNode.style.textDecorationLine = 'line-through';
   }
 
-  function enterSubmit(event) { 
-      if(event.key === 'Enter') {handleSubmit(event)}
-}
+
 
 
 
@@ -47,7 +50,7 @@ const InputArea = () => {
 
   return (
     <div>
-    <form onSubmit={handleSubmit} onKeyDown={enterSubmit} className={styles.inputArea}>
+    <form onClick={handleSubmit} onKeyDown={handleSubmit} className={styles.inputArea}>
       <h3>Введите следующее запланированное действие:</h3>
       <textarea name="task" value={task} placeholder="Введите следующее дело..." onChange={handleChange}></textarea>
       <button>Добавить дело!</button>
