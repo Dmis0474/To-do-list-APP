@@ -17,7 +17,7 @@ const InputArea = () => {
     e.preventDefault();
     const taskObj = {id: generatedId, text: task, done: false} 
     setTasks([...tasks, taskObj])
-    e.target.value = '';
+    setTask('');
     // console.log(tasks);
   }
 
@@ -31,6 +31,10 @@ const InputArea = () => {
       e.target.parentNode.style.textDecorationLine = 'line-through';
   }
 
+  function enterSubmit(event) { 
+      if(event.key === 'Enter') {handleSubmit(event)}
+}
+
 
 
  let taskList = tasks.map((task, index) => {
@@ -43,11 +47,9 @@ const InputArea = () => {
 
   return (
     <div>
-    <form onSubmit={handleSubmit} onKeyDown={(event) => {
-      if(event.key === 'Enter') {handleSubmit(event)}
-    }} className={styles.inputArea}>
+    <form onSubmit={handleSubmit} onKeyDown={enterSubmit} className={styles.inputArea}>
       <h3>Введите следующее запланированное действие:</h3>
-      <textarea name="task" placeholder="Введите следующее дело..." onChange={handleChange}></textarea>
+      <textarea name="task" value={task} placeholder="Введите следующее дело..." onChange={handleChange}></textarea>
       <button>Добавить дело!</button>
     </form>
     <ul>
