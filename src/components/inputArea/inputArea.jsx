@@ -42,17 +42,19 @@ const InputArea = () => {
   })
 
   return (
+    <div>
     <form onSubmit={handleSubmit} onKeyDown={(event) => {
       if(event.key === 'Enter') {handleSubmit(event)}
     }} className={styles.inputArea}>
       <h3>Введите следующее запланированное действие:</h3>
       <textarea name="task" placeholder="Введите следующее дело..." onChange={handleChange}></textarea>
       <button>Добавить дело!</button>
-      <ul>
-        Дела:
-        {taskList}
-      </ul>
     </form>
+    <ul>
+    Дела:
+    {taskList}
+  </ul>
+  </div>
   );
 }
 
