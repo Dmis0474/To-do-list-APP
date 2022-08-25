@@ -1,4 +1,4 @@
-import React, { useState , useId } from "react";
+import React, { useState } from "react";
 import styles from "./inputArea.module.css"
 
 const InputArea = () => {
@@ -46,7 +46,8 @@ const InputArea = () => {
   function editSubmit (e) {
     console.log(task.id)
     console.log(e.target.parentNode.getAttribute('id'))
-    setTasks(tasks.map((task) => task.id === e.target.parentNode.getAttribute('id')? {alert(1)}:{alert(2)}))  
+    setTasks(tasks.map((task) => task.id === e.target.parentNode.getAttribute('id')? 
+    setTasks([...tasks]) : console.log(1)))
   }
 
 
@@ -56,7 +57,7 @@ const InputArea = () => {
  let taskList = tasks.map((task, index) => {
     return (<li 
       id={task.id}
-      key={task.id}>
+      key={index}>
       <input 
       type="checkbox" 
       checked ={checked}
