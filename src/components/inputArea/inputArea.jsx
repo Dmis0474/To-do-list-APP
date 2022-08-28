@@ -14,19 +14,18 @@ const InputArea = () => {
     // console.log(task);
   }
 
+  
 
+  
   function handleSubmit(e) {
     const generatedId = Math.random().toString(16).slice(2)
-    e.preventDefault();
     const taskObj = {id: generatedId, text: task, done: false} 
-    // if (e.type === 'click') {
+    e.preventDefault();
+    
+    
     setTasks([...tasks, taskObj])
     setTask('');
-    // }
-    // if (e.key === 'Enter') {
-    //   setTasks([...tasks, taskObj])
-    //   setTask('');
-    // } 
+    
   }
 
   
@@ -44,10 +43,12 @@ const InputArea = () => {
   }
 
   function editSubmit (e) {
-    console.log(task.id)
-    console.log(e.target.parentNode.getAttribute('id'))
-    setTasks(tasks.map((task) => task.id === e.target.parentNode.getAttribute('id')? 
-    setTasks([...tasks]) : console.log(1)))
+    
+    setTasks(tasks.map((task) => task.id === e.target.parentNode.getAttribute('id'))) ?
+    
+    setTasks([...tasks]) : setTask([...tasks]);
+    console.log("tasksss", tasks)
+    console.log(e.target.value)
   }
 
 
@@ -57,7 +58,7 @@ const InputArea = () => {
  let taskList = tasks.map((task, index) => {
     return (<li 
       id={task.id}
-      key={index}>
+      key={task.id}>
       <input 
       type="checkbox" 
       checked ={checked}
@@ -94,8 +95,9 @@ const InputArea = () => {
         >Запомнить
       </button>
       ) : (
-        <button onClick={() =>{
+        <button onClick={(e) =>{
         setEditMode(!editMode); 
+          task = e.currentTarget.target.value
       }
     }
       >Редактировать задачу
@@ -108,7 +110,7 @@ const InputArea = () => {
 
   return (
     <div>
-    <form onSubmit={handleSubmit} /*onKeyDown={handleSubmit}*/ className={styles.inputArea}>
+    <form onSubmit={handleSubmit}  onKeyDown={(e)=> {if (e.key === 'Enter') handleSubmit(e)}} className={styles.inputArea}>
       <h3>Введите следующее запланированное действие:</h3>
       <textarea name="task" value={task} placeholder="Введите следующее дело..." onChange={handleChange}></textarea>
       <button>Добавить дело!</button>
