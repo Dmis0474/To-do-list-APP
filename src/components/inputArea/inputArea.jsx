@@ -35,12 +35,26 @@ const InputArea = () => {
   }
 
   function editSubmit(e) {
-    console.log(e.target.parentNode.getAttribute("id"))
-    let newTasks =[...tasks];
-    setTasks(
-      newTasks.filter((task) => task.id === e.target.parentNode.getAttribute("id"))
-    );
-    console.log(newTasks)
+    // берем задачу, которую нужно торедактировать, изменяем текст    
+    const editedTask = tasks.find(task => task.id === e.target.parentNode.getAttribute("id"))
+    editedTask.text = value;
+    console.log('editedTask', editedTask);
+
+    // берем все отсальные задачи, кроме редактируемой
+    const noEditedTasks = tasks.filter((task) => task.id !== e.target.parentNode.getAttribute("id"))
+    console.log('noEditedTasks', noEditedTasks);
+
+    // записываем в tasks
+    setTasks([...noEditedTasks, editedTask]);
+    console.log('tasks after editing', tasks);
+    
+    setEditMode(false)
+
+    // let newTasks = [...tasks];
+    // setTasks(
+    //   newTasks.filter((task) => task.id === e.target.parentNode.getAttribute("id"))
+    // );
+    // console.log(newTasks)
   }
 
   let taskList = tasks.map((task, index) => {
