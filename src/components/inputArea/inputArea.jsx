@@ -6,7 +6,7 @@ const InputArea = () => {
   const [tasks, setTasks] = useState([]);
   const [checked, setChecked] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [value, setValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [edtiableTaskId, setEdtiableTaskId] = useState("")
   // const [deletedTask, deleteTask] = useState([]);
 
@@ -38,7 +38,7 @@ const InputArea = () => {
   function editSubmit(e) {
     // берем задачу, которую нужно торедактировать, изменяем текст    
     const editedTask = tasks.find(task => task.id === e.target.parentNode.getAttribute("id"))
-    editedTask.text = value;
+    editedTask.text = inputValue;
     console.log('editedTask', editedTask);
 
     // берем все отсальные задачи, кроме редактируемой
@@ -73,11 +73,11 @@ const InputArea = () => {
           <div>
           <input
             type="text"
-            value={value}
+            defaultValue={task.text}
             key={task.id}
             id={task.id}
             title={task.text}
-            onChange={(event) => setValue(event.target.value)}
+            onChange={(event) => setInputValue(event.target.value)}
           />
           
           </div >
