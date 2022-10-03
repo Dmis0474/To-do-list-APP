@@ -7,6 +7,7 @@ const InputArea = () => {
   const [checked, setChecked] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [value, setValue] = useState("");
+  const [edtiableTaskId, setEdtiableTaskId] = useState("")
   // const [deletedTask, deleteTask] = useState([]);
 
   const handleChange = (e) => {
@@ -68,7 +69,8 @@ const InputArea = () => {
             // console.log(event.target.checked);
           }}
         />
-        {editMode ? (
+        {task.id === edtiableTaskId && editMode ? (
+          <div>
           <input
             type="text"
             value={value}
@@ -77,19 +79,30 @@ const InputArea = () => {
             title={task.text}
             onChange={(event) => setValue(event.target.value)}
           />
+          
+          </div >
         ) : (
           <p>{task.text}</p>
         )}
         <button onClick={handleDelete}>Удалить</button>
         <button onClick={taskDone}>Задача выполнена!</button>
-
+        
         {editMode ? (
-          <button onClick={editSubmit}>Запомнить</button>
+          <button onClick={(e) => {
+            editSubmit(e);
+            setEditMode(false)
+          }
+
+          }>Запомнить</button>
         ) : (
           <button
             onClick={(e) => {
-              setEditMode(!editMode);
-              task = e.target.value;
+              setEditMode(!editMode)
+              setEdtiableTaskId(e.target.parentNode.getAttribute("id"));
+              task = e.target.value
+             
+              
+              // task.id === edtiableTaskId ? setEditMode(!editMode) : setEditMode(editMode);
             }}
           >
             Редактировать задачу
