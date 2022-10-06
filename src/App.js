@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./App.module.css";
-import InputArea from "./components/inputArea/inputArea.jsx";
+import Layout from "./components/layout/layout.jsx";
 
 let App = (props) => {
   return (
     <div className={styles.App}>
-        <InputArea/>
+        <Layout/>
     </div>
   )
 };
