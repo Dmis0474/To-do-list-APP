@@ -12,30 +12,29 @@ const Layout = () => {
 
   const handleChange = (e) => {
     setTask(e.target.value);
-    // console.log(task);
+    setInputValue(e.target.value);
+    
   };
 
-  function handleDelete(e) {
-    // console.log(e.target.parentNode.getAttribute('id'))
+  const handleDelete = (e) => {
     setTasks(
       tasks.filter((task) => task.id !== e.target.parentNode.getAttribute("id"))
     );
-  }
+  };
 
-  function taskDone(e) {
+  const taskDone = (e) => {
     e.target.parentNode.style.textDecorationLine = "line-through";
-  }
+  };
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     const generatedId = Math.random().toString(16).slice(2);
     const taskObj = { id: generatedId, text: task, done: false };
     e.preventDefault();
-
     setTasks([...tasks, taskObj]);
     setTask("");
-  }
+  };
 
-  function editSubmit(e) {
+  const editSubmit = (e) => {
     // берем задачу, которую нужно торедактировать, изменяем текст
     const editedTask = tasks.find(
       (task) => task.id === e.target.parentNode.getAttribute("id")
@@ -54,24 +53,17 @@ const Layout = () => {
     console.log("tasks after editing", tasks);
 
     setEditMode(false);
-
-    // let newTasks = [...tasks];
-    // setTasks(
-    //   newTasks.filter((task) => task.id === e.target.parentNode.getAttribute("id"))
-    // );
-    // console.log(newTasks)
-  }
+  };
 
   const submitChanges = (e) => {
     editSubmit(e);
     setEditMode(false);
+    console.log(task.text)
   };
 
   const editTasks = (e) => {
     setEditMode(!editMode);
     setEdtiableTaskId(e.target.parentNode.getAttribute("id"));
-    task = e.target.value;
-    // task.id === edtiableTaskId ? setEditMode(!editMode) : setEditMode(editMode);
   };
 
   const inputListener = (event) => {
@@ -81,13 +73,18 @@ const Layout = () => {
   return (
     <div>
       <h3>Введите следующее запланированное действие:</h3>
-      <Form task={task} handleSubmit={handleSubmit} handleChange={handleChange} />
+      <Form
+        task={task}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        inputListener={inputListener}
+      />
       <div>
-        {tasks.map((task) => {
+        {tasks.map((task, i) => {
           return (
             <Task
-              tasks={tasks}
               task={task}
+              key={task.text.toString()}
               editMode={editMode}
               edtiableTaskId={edtiableTaskId}
               handleDelete={handleDelete}
