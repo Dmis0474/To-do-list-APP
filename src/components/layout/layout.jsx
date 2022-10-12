@@ -84,6 +84,7 @@ const Layout = () => {
           return (
             <Task
               task={task}
+              id = {task.id}
               key={task.text.toString()}
               editMode={editMode}
               edtiableTaskId={edtiableTaskId}
