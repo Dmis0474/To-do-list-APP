@@ -6,6 +6,7 @@ const Task = (props) => {
     <div id={props.task.id}>
       <p>{props.task.text}</p>
       <Form
+        updateTask={true}
         onChange={props.inputListener}
         defaultValue={props.task.text}
         key={props.task.id}

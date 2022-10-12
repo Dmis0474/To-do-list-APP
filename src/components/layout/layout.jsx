@@ -74,11 +74,28 @@ const Layout = () => {
     <div>
       <h3>Введите следующее запланированное действие:</h3>
       <Form
+      updateTask={false}
         task={task}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         inputListener={inputListener}
+        onChange={inputListener}
+        defaultValue={task.text}
+        key={task.id}
+        id={task.id}
+        title={task.text}
+        onSubmit={submitChanges}
+       
+        editMode={editMode}
+        edtiableTaskId={edtiableTaskId}
+        handleDelete={handleDelete}
+        taskDone={taskDone}
+        editSubmit={editSubmit}
+        submitChanges={submitChanges}
+        editTasks={editTasks}
+        inputListener={inputListener}
       />
+      
       <div>
         {tasks.map((task, i) => {
           return (
