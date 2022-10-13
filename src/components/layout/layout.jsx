@@ -62,7 +62,7 @@ const Layout = () => {
   };
 
   const editTasks = (e) => {
-    setEditMode(!editMode);
+    // setEditMode(!editMode);
     setEdtiableTaskId(e.target.parentNode.getAttribute("id"));
   };
 

@@ -8,10 +8,14 @@ const Form = (props) => {
     <div id={props.task.id}>
       {props.updateTask === true ? (
         <div id={props.task.id}>
-          <button onClick={props.editTasks}>Редактировать</button>
-          <button onClick={props.taskDone}>Задача выполнена!</button>
-          <button onClick={props.handleDelete}>Удалить</button>
-          <button onClick={props.submitChanges}>Запомнить</button>
+          {props.editMode === true ? (
+          <button onClick={props.submitChanges}>Запомнить</button>)
+           : ( <div id={props.task.id}>
+            {props.edtiableTaskId !== props.task.id ?  <button onClick={props.editTasks}>Редактировать</button> : <input /> }
+            
+            <button onClick={props.taskDone}>Задача выполнена!</button>
+            <button onClick={props.handleDelete}>Удалить</button>
+            </div>)}
         </div>
       ) : (
         <form
