@@ -13,7 +13,6 @@ const Layout = () => {
   const handleChange = (e) => {
     setTask(e.target.value);
     setInputValue(e.target.value);
-    
   };
 
   const handleDelete = (e) => {
@@ -35,6 +34,7 @@ const Layout = () => {
   };
 
   const editSubmit = (e) => {
+
     // берем задачу, которую нужно торедактировать, изменяем текст
     const editedTask = tasks.find(
       (task) => task.id === e.target.parentNode.getAttribute("id")
@@ -62,7 +62,7 @@ const Layout = () => {
   };
 
   const editTasks = (e) => {
-    // setEditMode(!editMode);
+    setEditMode(!editMode);
     setEdtiableTaskId(e.target.parentNode.getAttribute("id"));
   };
 
@@ -70,30 +70,18 @@ const Layout = () => {
     setInputValue(event.target.value);
   };
 
+
+
   return (
     <div>
       <h3>Введите следующее запланированное действие:</h3>
       <Form
-      updateTask={false}
+        updateTask={false}
         task={task}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        inputListener={inputListener}
-        onChange={inputListener}
-        defaultValue={task.text}
         key={task.id}
-        id={task.id}
-        title={task.text}
-        onSubmit={submitChanges}
-       
-        editMode={editMode}
-        edtiableTaskId={edtiableTaskId}
-        handleDelete={handleDelete}
-        taskDone={taskDone}
-        editSubmit={editSubmit}
-        submitChanges={submitChanges}
-        editTasks={editTasks}
-        inputListener={inputListener}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        
       />
       
       <div>

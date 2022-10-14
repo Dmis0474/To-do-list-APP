@@ -2,20 +2,31 @@ import React from "react";
 import styles from "./form.module.css";
 
 const Form = (props) => {
-  console.log(props)
+  console.log(props);
   return (
-    
     <div id={props.task.id}>
       {props.updateTask === true ? (
         <div id={props.task.id}>
-          {props.editMode === true ? (
-          <button onClick={props.submitChanges}>Запомнить</button>)
-           : ( <div id={props.task.id}>
-            {props.edtiableTaskId !== props.task.id ?  <button onClick={props.editTasks}>Редактировать</button> : <input /> }
-            
-            <button onClick={props.taskDone}>Задача выполнена!</button>
+          {" "}
+          {!props.editMode ? (
+            <div id={props.task.id}>
+            <button onClick={props.editTasks}>Редактировать</button>
+            <button onClick={props.taskDone} >Задача выполнена </button>
             <button onClick={props.handleDelete}>Удалить</button>
-            </div>)}
+            </div>
+          ) : ( props.edtiableTaskId === props.task.id ?
+            <div id={props.task.id}>
+              <input
+                type="text"
+                defaultValue={props.task.text}
+                key={props.task.id}
+                id={props.task.id}
+                title={props.task.text}
+                onChange={props.inputListener}
+              />
+              <button onClick={props.editSubmit}>Сохранить</button>
+            </div> : <button>Редактировать</button>
+          )}
         </div>
       ) : (
         <form
