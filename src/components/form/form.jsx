@@ -7,14 +7,13 @@ const Form = (props) => {
     <div id={props.task.id}>
       {props.updateTask === true ? (
         <div id={props.task.id}>
-          {" "}
           {!props.editMode ? (
             <div id={props.task.id}>
-            <button onClick={props.editTasks}>Редактировать</button>
-            <button onClick={props.taskDone} >Задача выполнена </button>
-            <button onClick={props.handleDelete}>Удалить</button>
+              <button onClick={props.editTasks}>Редактировать</button>
+              <button onClick={props.taskDone}>Задача выполнена </button>
+              <button onClick={props.handleDelete}>Удалить</button>
             </div>
-          ) : ( props.edtiableTaskId === props.task.id ?
+          ) : props.edtiableTaskId === props.task.id ? (
             <div id={props.task.id}>
               <input
                 type="text"
@@ -25,7 +24,13 @@ const Form = (props) => {
                 onChange={props.inputListener}
               />
               <button onClick={props.editSubmit}>Сохранить</button>
-            </div> : <button>Редактировать</button>
+            </div>
+          ) : (
+            <div id={props.task.id}>
+              <button onClick={props.editTasks}>Редактировать</button>
+              <button onClick={props.taskDone}>Задача выполнена </button>
+              <button onClick={props.handleDelete}>Удалить</button>
+            </div>
           )}
         </div>
       ) : (

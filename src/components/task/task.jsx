@@ -6,16 +6,16 @@ const Task = (props) => {
     <div id={props.task.id}>
       <p>{props.task.text}</p>
       <Form
-      updateTask={true}
-      task={props.task}
-      key={props.task.id}
-      editMode={props.editMode}
-      editTasks={props.editTasks}
-      inputListener={props.inputListener}
-      edtiableTaskId={props.edtiableTaskId}
-      editSubmit={props.editSubmit}
-      taskDone={props.taskDone}
-      handleDelete={props.handleDelete}
+        updateTask={true}
+        task={props.task}
+        key={props.task.id}
+        editMode={props.editMode}
+        editTasks={props.editTasks}
+        inputListener={props.inputListener}
+        edtiableTaskId={props.edtiableTaskId}
+        editSubmit={props.editSubmit}
+        taskDone={props.taskDone}
+        handleDelete={props.handleDelete}
       />
     </div>
   );

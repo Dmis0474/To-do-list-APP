@@ -90,7 +90,7 @@ const Layout = () => {
             <Task
               task={task}
               id = {task.id}
-              key={task.text.toString()}
+              key={task.text.toString()+i}
               editMode={editMode}
               edtiableTaskId={edtiableTaskId}
               handleDelete={handleDelete}
