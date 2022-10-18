@@ -1,8 +1,8 @@
 import React from "react";
+import { useState } from "react";
 import styles from "./form.module.css";
 
 const Form = (props) => {
- 
   return (
     <div id={props.task.id}>
       {props.updateTask ? (
@@ -16,6 +16,12 @@ const Form = (props) => {
           ) : props.edtiableTaskId === props.task.id ? (
             <div id={props.task.id}>
               <input
+                type="date"
+                onChange={props.editDateListener}
+                min={props.dateNow}
+                max={props.maxDate}
+              />
+              <input
                 type="text"
                 defaultValue={props.task.text}
                 key={props.task.id}
@@ -28,7 +34,7 @@ const Form = (props) => {
           ) : (
             <div id={props.task.id}>
               <button onClick={props.editTasks}>Редактировать</button>
-              <button onClick={props.taskDone}>Задача выполнена </button>
+              <button onClick={props.taskDone}>Задача выполнена</button>
               <button onClick={props.handleDelete}>Удалить</button>
             </div>
           )}
@@ -47,7 +53,14 @@ const Form = (props) => {
             placeholder="Введите следующее дело..."
             onChange={props.handleChange}
           ></textarea>
-          <input type="date" onChange={props.dateListener} value={props.deadline} placeholder="дата завершения"/>
+          <h4 style={{ margin: 0 }}>Дата завершения</h4>
+          <input
+            type="date"
+            onChange={props.dateListener}
+            value={props.deadline}
+            min={props.dateNow}
+            max={props.maxDate}
+          />
           <button>Добавить дело!</button>
         </form>
       )}

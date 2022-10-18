@@ -5,7 +5,7 @@ const Task = (props) => {
   return (
     <div id={props.task.id}>
       <p>{props.task.text}</p>
-      <p>{props.task.time}</p>
+      <p>{props.task.deadline}</p>
       <Form
         updateTask={true}
         task={props.task}
@@ -17,6 +17,9 @@ const Task = (props) => {
         editSubmit={props.editSubmit}
         taskDone={props.taskDone}
         handleDelete={props.handleDelete}
+        dateNow={props.dateNow}
+        maxDate={props.maxDate}
+        editDateListener={props.editDateListener}
       />
     </div>
   );
