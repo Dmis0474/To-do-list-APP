@@ -9,10 +9,12 @@ const Layout = () => {
   const [inputValue, setInputValue] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [edtiableTaskId, setEdtiableTaskId] = useState("");
+  const [deadline, setDeadline] = useState("")
+  const [deadlines, setDeadlines] = useState([])
+
 
   const handleChange = (e) => {
     setTask(e.target.value);
-    setInputValue(e.target.value);
   };
 
   const handleDelete = (e) => {
@@ -27,10 +29,14 @@ const Layout = () => {
 
   const handleSubmit = (e) => {
     const generatedId = Math.random().toString(16).slice(2);
-    const taskObj = { id: generatedId, text: task, done: false };
-    e.preventDefault();
+    const taskObj = { id: generatedId, text: task, time:deadline, done:false };
     setTasks([...tasks, taskObj]);
-    setTask("");
+    setTask(""); 
+    let newDeadLine = deadline;
+    setDeadlines([...deadlines, newDeadLine])
+    setDeadline("")
+    console.log(`deadlines:${deadlines}`)
+    e.preventDefault();
   };
 
   const editSubmit = (e) => {
@@ -55,11 +61,7 @@ const Layout = () => {
     setEditMode(false);
   };
 
-  const submitChanges = (e) => {
-    editSubmit(e);
-    setEditMode(false);
-    console.log(task.text)
-  };
+ 
 
   const editTasks = (e) => {
     setEditMode(!editMode);
@@ -70,24 +72,31 @@ const Layout = () => {
     setInputValue(event.target.value);
   };
 
+  const dateListener = (e) => {
+    setDeadline(e.target.value)
+    console.log(`deadline: ${deadline}`)
+  };
+
 
 
   return (
     <div>
       <h3>Введите следующее запланированное действие:</h3>
       <Form
+        deadline={deadline}
         updateTask={false}
         task={task}
         key={task.id}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        
+        dateListener={dateListener}
       />
       
       <div>
         {tasks.map((task, i) => {
           return (
             <Task
+              deadlines={deadlines}
               task={task}
               id = {task.id}
               key={task.text.toString()+i}
@@ -96,9 +105,10 @@ const Layout = () => {
               handleDelete={handleDelete}
               taskDone={taskDone}
               editSubmit={editSubmit}
-              submitChanges={submitChanges}
+             
               editTasks={editTasks}
               inputListener={inputListener}
+              dateListener={dateListener}
             />
           );
         })}

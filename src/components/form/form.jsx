@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./form.module.css";
 
 const Form = (props) => {
-  console.log(props);
+ 
   return (
     <div id={props.task.id}>
-      {props.updateTask === true ? (
+      {props.updateTask ? (
         <div id={props.task.id}>
           {!props.editMode ? (
             <div id={props.task.id}>
@@ -47,7 +47,7 @@ const Form = (props) => {
             placeholder="Введите следующее дело..."
             onChange={props.handleChange}
           ></textarea>
-
+          <input type="date" onChange={props.dateListener} value={props.deadline} placeholder="дата завершения"/>
           <button>Добавить дело!</button>
         </form>
       )}

@@ -5,6 +5,7 @@ const Task = (props) => {
   return (
     <div id={props.task.id}>
       <p>{props.task.text}</p>
+      <p>{props.task.time}</p>
       <Form
         updateTask={true}
         task={props.task}
