@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import styles from "./form.module.css";
 
 const Form = (props) => {
@@ -19,7 +18,6 @@ const Form = (props) => {
                 type="date"
                 onChange={props.editDateListener}
                 min={props.dateNow}
-                max={props.maxDate}
               />
               <input
                 type="text"
@@ -59,7 +57,6 @@ const Form = (props) => {
             onChange={props.dateListener}
             value={props.deadline}
             min={props.dateNow}
-            max={props.maxDate}
           />
           <button>Добавить дело!</button>
         </form>

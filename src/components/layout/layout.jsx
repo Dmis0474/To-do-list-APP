@@ -11,7 +11,8 @@ const Layout = () => {
   const [edtiableTaskId, setEdtiableTaskId] = useState("");
   const [deadline, setDeadline] = useState("");
   const [dateNow, setDateNow] = useState("");
-  const [maxDate, setMaxDate] = useState("");
+  const [taskDoneStyle, setTaskDoneStyle] = useState(false);
+
   const [editDateValue, setEditDateValue] = useState("");
   useEffect(() => {
     getDates();
@@ -21,11 +22,6 @@ const Layout = () => {
     setDateNow(
       `${new Date().getFullYear()}-${
         new Date().getMonth() + 1
-      }-${new Date().getDate()}`
-    );
-    setMaxDate(
-      `${new Date().getFullYear()}-${
-        new Date().getMonth() + 2
       }-${new Date().getDate()}`
     );
   };
@@ -41,12 +37,9 @@ const Layout = () => {
   };
 
   const taskDone = (e) => {
-    const finishedTask = tasks.find(
-      (task) => task.id === e.target.parentNode.getAttribute("id")
-    );
-    const finishedTaskId = finishedTask.id;
-    document.getElementById(finishedTaskId).style.textDecoration =
-      "line-through";
+    const doneTasks = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
+    {...task, done: true} : {...task})
+    setTasks([...doneTasks])
   };
 
   const handleSubmit = (e) => {
@@ -64,23 +57,9 @@ const Layout = () => {
   };
 
   const editSubmit = (e) => {
-    // берем задачу, которую нужно торедактировать, изменяем текст
-    const editedTask = tasks.find(
-      (task) => task.id === e.target.parentNode.getAttribute("id")
-    );
-    editedTask.text = inputValue;
-    editedTask.deadline = editDateValue;
-
-    // берем все отсальные задачи, кроме редактируемой
-    const noEditedTasks = tasks.filter(
-      (task) => task.id !== e.target.parentNode.getAttribute("id")
-    );
-    // console.log("noEditedTasks", noEditedTasks);
-
-    // записываем в tasks
-    setTasks([...noEditedTasks, editedTask]);
-    // console.log("tasks after editing", tasks);
-
+    const editedTask = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
+    {...task, text:inputValue, deadline:editDateValue} : {...task})
+    setTasks([...editedTask])
     setEditMode(false);
   };
 
@@ -108,7 +87,6 @@ const Layout = () => {
       <h3>Введите следующее запланированное действие:</h3>
       <Form
         dateNow={dateNow}
-        maxDate={maxDate}
         deadline={deadline}
         updateTask={false}
         task={task}
@@ -134,7 +112,6 @@ const Layout = () => {
               inputListener={inputListener}
               dateListener={dateListener}
               dateNow={dateNow}
-              maxDate={maxDate}
               editDateListener={editDateListener}
             />
           );
