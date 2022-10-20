@@ -16,6 +16,7 @@ const Form = (props) => {
             <div id={props.task.id}>
               <input
                 type="date"
+                defaultValue={props.dateNow}
                 onChange={props.editDateListener}
                 min={props.dateNow}
               />
@@ -54,8 +55,8 @@ const Form = (props) => {
           <h4 style={{ margin: 0 }}>Дата завершения</h4>
           <input
             type="date"
+            defaultValue={props.dateNow}
             onChange={props.dateListener}
-            value={props.deadline}
             min={props.dateNow}
           />
           <button>Добавить дело!</button>

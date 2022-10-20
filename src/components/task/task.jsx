@@ -4,8 +4,8 @@ import Form from "../form/form";
 const Task = (props) => {
   return (
     <div id={props.task.id}>
-      {props.task.done ? <p style={{textDecorationLine : "line-through" }}>{props.task.text}</p> : <p>{props.task.text}</p>}
       <p>{props.task.deadline}</p>
+      {props.task.done ? <p style={{textDecorationLine : "line-through" }}>{props.task.text}</p> : <p>{props.task.text}</p>}
       <Form
         updateTask={true}
         task={props.task}
@@ -20,6 +20,7 @@ const Task = (props) => {
         dateNow={props.dateNow}
         maxDate={props.maxDate}
         editDateListener={props.editDateListener}
+        
       />
     </div>
   );

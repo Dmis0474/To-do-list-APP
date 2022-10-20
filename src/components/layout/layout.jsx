@@ -9,7 +9,7 @@ const Layout = () => {
   const [inputValue, setInputValue] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [edtiableTaskId, setEdtiableTaskId] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [deadline, setDeadline] = useState('');
   const [dateNow, setDateNow] = useState("");
   const [taskDoneStyle, setTaskDoneStyle] = useState(false);
 
@@ -37,9 +37,9 @@ const Layout = () => {
   };
 
   const taskDone = (e) => {
-    const doneTasks = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
+    const modifiedTasks = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
     {...task, done: true} : {...task})
-    setTasks([...doneTasks])
+    setTasks([...modifiedTasks])
   };
 
   const handleSubmit = (e) => {
@@ -58,14 +58,16 @@ const Layout = () => {
 
   const editSubmit = (e) => {
     const editedTask = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
-    {...task, text:inputValue, deadline:editDateValue} : {...task})
-    setTasks([...editedTask])
+    {task, text:inputValue || task.text, deadline:editDateValue || task.deadline} : {...task})
+    setTasks(editedTask)
     setEditMode(false);
+    console.log(tasks)
   };
 
   const editTasks = (e) => {
     setEditMode(!editMode);
     setEdtiableTaskId(e.target.parentNode.getAttribute("id"));
+    console.log(tasks)
   };
 
   const inputListener = (event) => {
@@ -102,7 +104,7 @@ const Layout = () => {
             <Task
               task={task}
               id={task.id}
-              key={task.text.toString() + i}
+              key={task.text + i}
               editMode={editMode}
               edtiableTaskId={edtiableTaskId}
               handleDelete={handleDelete}
