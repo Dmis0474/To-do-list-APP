@@ -43,6 +43,7 @@ const Layout = () => {
   };
 
   const handleSubmit = (e) => {
+    if(task){
     const generatedId = Math.random().toString(16).slice(2);
     const newTask = {
       id: generatedId,
@@ -50,7 +51,7 @@ const Layout = () => {
       deadline: deadline,
       done: false,
     };
-    setTasks([...tasks, newTask]);
+    setTasks([...tasks, newTask]);}
     setTask("");
     setDeadline("");
     e.preventDefault();
@@ -58,7 +59,7 @@ const Layout = () => {
 
   const editSubmit = (e) => {
     const editedTask = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
-    {task, text:inputValue || task.text, deadline:editDateValue || task.deadline} : {...task})
+    {...task, text:inputValue || task.text, deadline:editDateValue || task.deadline} : {...task})
     setTasks(editedTask)
     setEditMode(false);
     console.log(tasks)
@@ -75,8 +76,7 @@ const Layout = () => {
   };
 
   const dateListener = (e) => {
-    setDeadline(e.target.value);
-    // console.log(`deadline: ${deadline}`);
+    setDeadline(e.target.value.split('-').reverse().join('-'));
   };
 
   const editDateListener = (event) => {
