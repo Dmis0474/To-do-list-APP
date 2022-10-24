@@ -6,25 +6,20 @@ import styles from "./form.module.css";
 const Form = (props) => {
   return (
     <div id={props.task.id}>
-      {props.updateTask  ? 
-        (
-           <EditForm
-            id={props.task.id}
-            task={props.task}
-            editMode={props.editMode}
-            dateNow={props.dateNow}
-            editDateListener={props.editDateListener}
-            inputListener={props.inputListener}
-            editSubmit={props.editSubmit}
-            editTasks={props.editTasks}
-            taskDone={props.taskDone}
-            handleDelete={props.handleDelete}
-            edtiableTaskId={props.edtiableTaskId}
-          />)
-          
-         
-           
-       : (
+      {props.updateTask ? (
+        <EditForm
+          task={props.task}
+          editMode={props.editMode}
+          dateNow={props.dateNow}
+          editDateListener={props.editDateListener}
+          inputListener={props.inputListener}
+          editSubmit={props.editSubmit}
+          editTasks={props.editTasks}
+          taskDone={props.taskDone}
+          handleDelete={props.handleDelete}
+          edtiableTaskId={props.edtiableTaskId}
+        />
+      ) : (
         <form
           className={styles.form}
           onSubmit={props.handleSubmit}

@@ -5,7 +5,13 @@ const Task = (props) => {
   return (
     <div id={props.task.id}>
       <p>Дата завершения: {props.task.deadline}</p>
-      {props.task.done ? <p style={{textDecorationLine : "line-through" }}>Задача: {props.task.text}</p> : <p>Задача: {props.task.text}</p>}
+      {props.task.done ? (
+        <p style={{ textDecorationLine: "line-through" }}>
+          Задача: {props.task.text}
+        </p>
+      ) : (
+        <p>Задача: {props.task.text}</p>
+      )}
       <Form
         updateTask={true}
         task={props.task}
@@ -19,7 +25,6 @@ const Task = (props) => {
         handleDelete={props.handleDelete}
         dateNow={props.dateNow}
         editDateListener={props.editDateListener}
-        
       />
     </div>
   );

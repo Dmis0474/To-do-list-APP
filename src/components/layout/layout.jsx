@@ -9,7 +9,7 @@ const Layout = () => {
   const [inputValue, setInputValue] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [edtiableTaskId, setEdtiableTaskId] = useState("");
-  const [deadline, setDeadline] = useState('');
+  const [deadline, setDeadline] = useState("");
   const [dateNow, setDateNow] = useState("");
   const [taskDoneStyle, setTaskDoneStyle] = useState(false);
 
@@ -37,38 +37,49 @@ const Layout = () => {
   };
 
   const taskDone = (e) => {
-    const modifiedTasks = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
-    {...task, done: true} : {...task})
-    setTasks([...modifiedTasks])
+    const modifiedTasks = tasks.map((task) =>
+      task.id === e.target.parentNode.getAttribute("id")
+        ? { ...task, done: true }
+        : { ...task }
+    );
+    setTasks([...modifiedTasks]);
   };
 
   const handleSubmit = (e) => {
-    if(task){
-    const generatedId = Math.random().toString(16).slice(2);
-    const newTask = {
-      id: generatedId,
-      text: task,
-      deadline: deadline,
-      done: false,
-    };
-    setTasks([...tasks, newTask]);}
+    e.preventDefault();
+    if (task) {
+      const generatedId = Math.random().toString(16).slice(2);
+      const newTask = {
+        id: generatedId,
+        text: task,
+        deadline: deadline,
+        done: false,
+      };
+      setTasks([...tasks, newTask]);
+    }
     setTask("");
     setDeadline("");
-    e.preventDefault();
   };
 
   const editSubmit = (e) => {
-    const editedTask = tasks.map(task => (task.id === e.target.parentNode.getAttribute("id")) ?
-    {...task, text:inputValue || task.text, deadline:editDateValue || task.deadline} : {...task})
-    setTasks(editedTask)
+    const editedTasks = tasks.map((task) =>
+      task.id === e.target.parentNode.getAttribute("id")
+        ? {
+            ...task,
+            text: inputValue || task.text,
+            deadline: editDateValue || task.deadline,
+          }
+        : { ...task }
+    );
+    setTasks(editedTasks);
     setEditMode(false);
-    console.log(tasks)
+    console.log(tasks);
   };
 
   const editTasks = (e) => {
     setEditMode(!editMode);
     setEdtiableTaskId(e.target.parentNode.getAttribute("id"));
-    console.log(tasks)
+    console.log(tasks);
   };
 
   const inputListener = (event) => {
@@ -76,11 +87,11 @@ const Layout = () => {
   };
 
   const dateListener = (e) => {
-    setDeadline(e.target.value.split('-').reverse().join('-'));
+    setDeadline(e.target.value.split("-").reverse().join("-"));
   };
 
   const editDateListener = (event) => {
-    setEditDateValue(event.target.value);
+    setEditDateValue(event.target.value.split("-").reverse().join("-"));
     console.log(`11111:${editDateValue}`);
   };
 
@@ -103,7 +114,6 @@ const Layout = () => {
           return (
             <Task
               task={task}
-              id={task.id}
               key={task.text + i}
               editMode={editMode}
               edtiableTaskId={edtiableTaskId}

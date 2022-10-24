@@ -1,12 +1,10 @@
 import React from "react";
 
-
-
 const EditForm = (props) => {
-    return (
+  return (
+    <div id={props.task.id}>
+      {props.editMode && props.task.id === props.edtiableTaskId ? (
         <div id={props.task.id}>
-      {props.editMode && props.task.id === props.edtiableTaskId ? 
-        (<div id={props.task.id}>
           <input
             type="date"
             defaultValue={props.dateNow}
@@ -29,11 +27,9 @@ const EditForm = (props) => {
           <button onClick={props.taskDone}>Задача выполнена</button>
           <button onClick={props.handleDelete}>Удалить</button>
         </div>
-      )} 
-      </div>
-    )
-    
-    
-}
+      )}
+    </div>
+  );
+};
 
-export default EditForm
+export default EditForm;
